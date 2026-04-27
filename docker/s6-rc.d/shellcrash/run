@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e
 
+if [ -z "$(ls -A /etc/ShellCrash)" ]; then
+    cp -r /etc/ShellCrash_backup/* /etc/ShellCrash/
+fi
+
 . /etc/ShellCrash/configs/command.env
 
 exec /bin/sh -c "${COMMAND} > /dev/null"

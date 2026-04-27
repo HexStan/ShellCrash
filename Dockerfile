@@ -67,6 +67,7 @@ COPY --from=builder /etc/ShellCrash /etc/ShellCrash
 COPY --from=builder /tmp/CrashCore.tar.gz /etc/ShellCrash/CrashCore.tar.gz
 COPY --from=builder /etc/profile /etc/profile
 COPY --from=builder /usr/bin/crash /usr/bin/crash
+RUN cp -a /etc/ShellCrash /etc/ShellCrash.init
 
 #安装s6
 COPY --from=builder /tmp/s6_arch.tar.xz /tmp/s6_arch.tar.xz

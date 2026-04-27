@@ -1,0 +1,4 @@
+#!/command/execlineb -P
+if -n { test -f /etc/ShellCrash/start.sh }
+foreground { echo "sc-init: Initializing /etc/ShellCrash from backup" }
+foreground { cp -a /etc/ShellCrash.init/. /etc/ShellCrash/ }

@@ -42,6 +42,9 @@ RUN set -eux; \
     mkdir -p /etc/ShellCrash/ruleset /etc/ShellCrash/ui; \
     curl -fsSL "https://github.com/juewuy/ShellCrash/raw/update/bin/geodata/mrs.tar.gz" | tar -zxf - -C /etc/ShellCrash/ruleset; \
     curl -fsSL "https://github.com/juewuy/ShellCrash/raw/update/bin/dashboard/zashboard.tar.gz" | tar -zxf - -C /etc/ShellCrash/ui
+
+#备份ShellCrash程序目录
+RUN cp -a /etc/ShellCrash /etc/ShellCrash_backup
 	  
 ############################
 # Stage 2: runtime
@@ -76,5 +79,9 @@ RUN tar -xJf /tmp/s6_arch.tar.xz -C / && rm -rf /tmp/s6_arch.tar.xz
 COPY docker/s6-rc.d /etc/s6-overlay/s6-rc.d
 ENV S6_CMD_WAIT_FOR_SERVICES=1
 
-ENTRYPOINT ["/init"]
+#初始化脚本
+COPY docker/init.sh /init.sh
+RUN chmod +x /init.sh
+
+ENTRYPOINT ["/init.sh", "/init"]
 

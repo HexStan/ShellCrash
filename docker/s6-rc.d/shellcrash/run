@@ -5,6 +5,8 @@ if [ -z "$(ls -A /etc/ShellCrash)" ]; then
     echo "shellcrash: initializing /etc/ShellCrash from backup"
     cp -r /etc/ShellCrash_backup/* /etc/ShellCrash/
     echo "successfully initialized"
+else
+    echo "skipping initialization"
 fi
 
 . /etc/ShellCrash/configs/command.env
